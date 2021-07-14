@@ -5,6 +5,7 @@
 p {
   margin: 0;
   padding: 0;
+  font-family : "Source Code Pro", monospace;
 }
 
 nav {
@@ -13,13 +14,22 @@ nav {
   height: 60px;
   align-items: center;
   justify-content: flex-end;
-  background-color: coral;
+  background-color: #178CDA
+
+  ;
 }
+
+/* .ball{
+    display: block;
+    max-height: 5px;
+    max-width: 5px;
+} */
 
 nav a {
   margin-right: 50px;
-  color: white;
+  color: #222;
   text-decoration: none;
+  font-family : "Source Code Pro", sans-serif;
 }
 
 .list-wrapper {
@@ -32,9 +42,11 @@ nav a {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  border: 2px solid coral;
+  border: 2px solid #DA1717
+  ;
   padding: 10px;
   border-radius: 7px;
+  font-family: "Source Code Pro", monospace;
 }
 
 .list-wrapper a {
@@ -45,6 +57,7 @@ nav a {
 .poke {
   width: 90%;
   margin: auto;
+  font-family: "Source Code Pro", monospace;
 }
 
 .pokemon-wrapper {

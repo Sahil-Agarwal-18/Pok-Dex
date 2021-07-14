@@ -8,7 +8,11 @@ function App() {
   return (
     <div className="App">
       <nav>
-        <NavLink to={"/"}>Search</NavLink>
+        <NavLink to={"/"}>
+          {" "}
+          Original PokéDex
+          {/* <img src="Images/image.png" class="ball"></img> */}
+        </NavLink>
       </nav>
       <Switch>
         <Route path={"/"} exact component={PokemonList} />
