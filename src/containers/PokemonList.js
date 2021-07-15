@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { GetPokemonList } from "../actions/pokemonActions";
@@ -7,11 +7,23 @@ import ReactPaginate from "react-bootstrap-4-pagination";
 
 const PokemonList = (props) => {
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.PokemonList);
-  React.useEffect(() => {
-    FetchData(1);
+
+  useEffect(() => {
+    const url_string = window.location.href;
+    const url = new URL(url_string);
+    if (url.searchParams.get("page")) {
+      setPage(Number(url.searchParams.get("page")));
+    } else {
+      setPage(1);
+    }
   }, []);
+
+  useEffect(() => {
+    FetchData(page);
+  }, [page]);
 
   const FetchData = (page = 1) => {
     dispatch(GetPokemonList(page));
@@ -54,12 +66,18 @@ const PokemonList = (props) => {
         </button>
       </div>
       {ShowData()}
-      {!_.isEmpty(pokemonList.data) && (
+      {!_.isEmpty(pokemonList.data) && page > 0 && (
+        //<div></div> // This is if I do not want the nav bar at the bottom to show up
         <ReactPaginate
-          pageCount={Math.ceil(pokemonList.count / 15)}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
-          onPageChange={(data) => FetchData(data.selected + 1)}
+          // pageCount={Math.ceil(pokemonList.count / 15)}
+          // pageRangeDisplayed={2}
+          // marginPagesDisplayed={1}
+          currentPage={page}
+          totalPages={5}
+          prevNext={true}
+          href="http://localhost:3000/?page=*"
+          pageOneHref="http://localhost:3000/"
+          // onPageChange={(data) => FetchData(data.selected + 1)}
           containerClassName={"pagination"}
         />
       )}
